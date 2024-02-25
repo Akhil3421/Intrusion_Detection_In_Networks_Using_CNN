@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Intrusion Detector</title>
+    <style>
+        body{
+            background-color: aqua;
+        }
+        .logindiv {
+            background-color: lavender;
+            display:flex;
+            flex-flow: row wrap;
+            align-items: center;
+            margin-top: 0em;
+            margin-left: 7em;
+            margin-right:11em;
+            padding: 30px;
+            box-shadow: 10px 10px 8px 10px lightblue;
+        }
+        .logindiv h1{
+            font-size: 40px;
+        }
+        .logindiv label{
+            font-size:18px;
+        }
+        
+        .elmt{
+            vertical-align: middle;
+            width: 30%;
+            margin: 5px 10px 5px 0;
+            padding: 10px;
+        }
+
+        .form-container input[type="number"],
+        .form-container select {
+        flex: 1;
+        padding: 10px 50px 10px 50px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        }
+
+        
+        .form-container button[type="submit"] {
+        grid-column: 1 / span 7;
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        }
+        /* Styling the number input */
+        input[type="number"] {
+        -moz-appearance: textfield;
+        appearance: textfield;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Intrusion Detector  MultiClass</h1>
+        <form action="{{ url_for('predict')}}" method="post" class="logindiv">
+            <div class="elmt">
+                <h2>{{prediction_text}}</h2>
+            </div>
+            
+            <div class="elmt">
+                <input type="number" step="0.000001" name="dur" placeholder="dur" required="required" /><br>
+            </div>
+            <div class="elmt">
+                <input type="number" step="0.000001" name="sbytes" placeholder="sbytes" required="required" /><br>
+            </div>
+            <div class="elmt">
+                <input type="number" step="0.000001" name="dbytes" placeholder="dbytes" required="required" /><br>
+            </div>
+            <div class="elmt">
+                <input type="number" step="0.000001" name="rate" placeholder="rate" required="required" /><br>
+            </div>
+            <div class="elmt">
+                <input type="number" step="0.000001" name="sttl" placeholder="sttl" required="required" /><br>
+            </div>
+            <div class="elmt">
+                <input type="number" step="0.000001" name="dttl" placeholder="dttl" required="required" /><br>
+            </div>
+            <div class="elmt">
+                <input type="number" step="0.000001" name="sload" placeholder="sload" required="required" /><br>
+            </div>
+            <div class="elmt">
+                <input type="number" step="0.000001" name="dload" placeholder="dload" required="required" /><br>
+            </div>
+            <div class="elmt">
+                <input type="number" step="0.000001" name="sinpkt" placeholder="sinpkt" required="required" /><br>
+            </div>
+            <div class="elmt">
+                <input type="number" step="0.000001" name="dinpkt" placeholder="dinpkt" required="required" /><br>
+            </div>
+            <div class="elmt">
+                <input type="number" step="0.000001" name="sjit" placeholder="sjit" required="required" /><br>
+            </div>
+            <div class="elmt">
+                <input type="number" step="0.000001" name="djit" placeholder="djit" required="required" /><br>
+            </div>
+            <div class="elmt">
+                <input type="number" step="0.000001" name="swin" placeholder="swin" required="required" /><br>
+            </div>
+            <div class="elmt">
+                <input type="number" step="0.000001" name="stcpb" placeholder="stcpb" required="required" /><br>
+            </div>
+            <div class="elmt">
+                <input type="number" step="0.000001" name="dtcpb" placeholder="dtcpb" required="required" /><br>
+            </div>
+            <div class="elmt">
+                <input type="number" step="0.000001" name="tcprtt" placeholder="tcprtt" required="required" /><br>
+            </div>
+            <div class="elmt">
+                <input type="number" step="0.000001" name="synack" placeholder="synack" required="required" /><br>
+            </div>
+            <div class="elmt">
+                <input type="number" step="0.000001" name="ackdat" placeholder="ackdat" required="required" /><br>
+            </div>
+            <div class="elmt">
+                <input type="number" step="0.000001" name="smean" placeholder="smean" required="required" /><br>
+            </div>
+            <div class="elmt">
+                <input type="number" step="0.000001" name="dmean" placeholder="dmean" required="required" /><br>
+            </div>
+            <div class="elmt">
+                <input type="number" step="0.000001" name="trans_depth" placeholder="trans_depth" required="required" /><br>
+            </div>
+            <div class="elmt">
+                <input type="number" step="0.000001" name="response_body_len" placeholder="response_body_len" required="required" /><br>
+            </div>
+            <div class="elmt">
+                <input type="number" step="0.000001" name="ct_state_ttl" placeholder="ct_state_ttl" required="required" /><br>
+            </div>
+            <div class="elmt">
+                <input type="number" step="0.000001" name="ct_src_dport_ltm" placeholder="ct_src_dport_ltm" required="required" /><br>
+            </div>
+            <div class="elmt">
+                <input type="number" step="0.000001" name="ct_dst_sport_ltm" placeholder="ct_dst_sport_ltm" required="required" /><br>
+            </div>
+            <div class="elmt">
+                <input type="number" step="0.000001" name="ct_dst_src_ltm" placeholder="ct_dst_src_ltm" required="required" /><br>
+            </div>
+            <div class="elmt">
+                <input type="number" step="0.000001" name="ct_ftp_cmd" placeholder="ct_ftp_cmd" required="required" /><br>
+            </div>
+            <div class="elmt">
+                <input type="number" step="0.000001" name="ct_flw_http_mthd" placeholder="ct_flw_http_mthd" required="required" /><br>
+            </div>
+            <div class="elmt">
+                <input type="number" step="0.000001" name="ct_src_ltm" placeholder="ct_src_ltm" required="required" /><br>
+            </div>
+            <div class="elmt">
+                <input type="number" step="0.000001" name="ct_srv_dst" placeholder="ct_srv_dst" required="required" /><br>
+            </div>
+            <div class="elmt">
+                <input type="number" step="0.000001" name="is_sm_ips_ports" placeholder="is_sm_ips_ports" required="required" /><br>
+            </div>
+            
+            <div class="elmt">
+                <select name="proto" required="required">
+                    <option value="" disabled selected>Select a Proto Type</option>
+                    <option value="udp">UDP</option>
+                    <option value="arp">ARP</option>
+                    <option value="tcp">TCP</option>
+                    <option value="igmp">IGMP</option>
+                    <option value="ospf">OSPF</option>
+                    <option value="sctp">SCTP</option>
+                    <option value="gre">GRE</option>
+                    <option value="ggp">GGP</option>
+                    <option value="ip">IP</option>
+                    <option value="ipnip">IPNIP</option>
+                    <option value="st2">ST2</option>
+                    <option value="argus">Argus</option>
+                    <option value="chaos">Chaos</option>
+                    <option value="egp">EGP</option>
+                    <option value="emcon">EMCON</option>
+                    <option value="nvp">NVP</option>
+                    <option value="pup">PUP</option>
+                    <option value="xnet">XNET</option>
+                    <option value="mux">MUX</option>
+                    <option value="dcn">DCN</option>
+                    <option value="hmp">HMP</option>
+                    <option value="prm">PRM</option>
+                    <option value="trunk-1">Trunk-1</option>
+                    <option value="trunk-2">Trunk-2</option>
+                    <option value="xns-idp">XNS-IDP</option>
+                    <option value="leaf-1">Leaf-1</option>
+                    <option value="leaf-2">Leaf-2</option>
+                    <option value="irtp">IRTP</option>
+                    <option value="rdp">RDP</option>
+                    <option value="netblt">NETBLT</option>
+                    <option value="mfe-nsp">MFE-NSP</option>
+                    <option value="merit-inp">Merit-INP</option>
+                    <option value="3pc">3PC</option>
+                    <option value="idpr">IDPR</option>
+                    <option value="ddp">DDP</option>
+                    <option value="idpr-cmtp">IDPR-CMTP</option>
+                    <option value="tp++">TP++</option>
+                    <option value="ipv6">IPv6</option>
+                    <option value="sdrp">SDRP</option>
+                    <option value="ipv6-frag">IPv6-FRAG</option>
+                    <option value="ipv6-route">IPv6-ROUTE</option>
+                    <option value="idrp">IDRP</option>
+                    <option value="mhrp">MHRP</option>
+                    <option value="i-nlsp">I-NLSP</option>
+                    <option value="rvd">RVD</option>
+                    <option value="mobile">Mobile</option>
+                    <option value="narp">NARP</option>
+                    <option value="skip">SKIP</option>
+                    <option value="tlsp">TLSP</option>
+                    <option value="ipv6-no">IPv6-NO</option>
+                    <option value="any">Any</option>
+                    <option value="ipv6-opts">IPv6-OPTS</option>
+                    <option value="cftp">CFTP</option>
+                    <option value="sat-expak">SAT-EXPAK</option>
+                    <option value="ippc">IPPC</option>
+                    <option value="kryptolan">KRYPTOLAN</option>
+                    <option value="sat-mon">SAT-MON</option>
+                    <option value="cpnx">CPNX</option>
+                    <option value="wsn">WSN</option>
+                    <option value="pvp">PVP</option>
+                    <option value="br-sat-mon">BR-SAT-MON</option>
+                    <option value="sun-nd">SUN-ND</option>
+                    <option value="wb-mon">WB-MON</option>
+                    <option value="vmtp">VMTP</option>
+                    <option value="ttp">TTP</option>
+                    <option value="vines">VINES</option>
+                    <option value="nsfnet-igp">NSFNET-IGP</option>
+                    <option value="dgp">DGP</option>
+                    <option value="eigrp">EIGRP</option>
+                    <option value="tcf">TCF</option>
+                    <option value="sprite-rpc">Sprite-RPC</option>
+                    <option value="larp">LARP</option>
+                    <option value="mtp">MTP</option>
+                    <option value="ax.25">AX.25</option>
+                    <option value="ipip">IPIP</option>
+                    <option value="aes-sp3-d">AES-SP3-D</option>
+                    <option value="micp">MICP</option>
+                    <option value="encap">ENCAP</option>
+                    <option value="pri-enc">PRI-ENC</option>
+                    <option value="gmtp">GMTP</option>
+                    <option value="ifmp">IFMP</option>
+                    <option value="pnni">PNNI</option>
+                    <option value="qnx">QNX</option>
+                    <option value="scps">SCPS</option>
+                    <option value="cbt">CBT</option>
+                    <option value="bbn-rcc">BBN-RCC</option>
+                    <option value="igp">IGP</option>
+                    <option value="bna">BNA</option>
+                    <option value="swipe">SWIPE</option>
+                    <option value="visa">VISA</option>
+                    <option value="ipcv">IPCV</option>
+                    <option value="cphb">CPHB</option>
+                    <option value="iso-tp4">ISO-TP4</option>
+                    <option value="wb-expak">WB-EXPAK</option>
+                    <option value="sep">SEP</option>
+                    <option value="secure-vmtp">Secure-VMTP</option>
+                    <option value="xtp">XTP</option>
+                    <option value="il">IL</option>
+                    <option value="rsvp">RSVP</option>
+                    <option value="unas">UNAS</option>
+                    <option value="fc">FC</option>
+                    <option value="iso-ip">ISO-IP</option>
+                    <option value="etherip">ETHERIP</option>
+                    <option value="pim">PIM</option>
+                    <option value="aris">ARIS</option>
+                    <option value="a/n">A/N</option>
+                    <option value="ipcomp">IPCOMP</option>
+                    <option value="snp">SNP</option>
+                    <option value="compaq-peer">COMPAQ-PEER</option>
+                    <option value="ipx-n-ip">IPX-N-IP</option>
+                    <option value="pgm">PGM</option>
+                    <option value="vrrp">VRRP</option>
+                    <option value="l2tp">L2TP</option>
+                    <option value="zero">ZERO</option>
+                    <option value="ddx">DDX</option>
+                    <option value="iatp">IATP</option>
+                    <option value="stp">STP</option>
+                    <option value="srp">SRP</option>
+                    <option value="uti">UTI</option>
+                    <option value="sm">SM</option>
+                    <option value="smp">SMP</option>
+                    <option value="isis">ISIS</option>
+                    <option value="ptp">PTP</option>
+                    <option value="fire">FIRE</option>
+                    <option value="crtp">CRTP</option>
+                    <option value="crudp">CRUDP</option>
+                    <option value="sccopmce">SCCOPMCE</option>
+                    <option value="iplt">IPLT</option>
+                    <option value="pipe">PIPE</option>
+                    <option value="sps">SPS</option>
+                    <option value="ib">IB</option>
+
+                </select>
+            </div>
+            <div class="elmt">  
+                <select name="service" required="required">
+                    <option value="" disabled selected>Select an Service</option>
+                    <option value="-">-</option>
+                    <option value="http">HTTP</option>
+                    <option value="ftp">FTP</option>
+                    <option value="ftp-data">FTP-DATA</option>
+                    <option value="smtp">SMTP</option>
+                    <option value="pop3">POP3</option>
+                    <option value="dns">DNS</option>
+                    <option value="snmp">SNMP</option>
+                    <option value="ssl">SSL</option>
+                    <option value="dhcp">DHCP</option>
+                    <option value="irc">IRC</option>
+                    <option value="radius">RADIUS</option>
+                    <option value="ssh">SSH</option>
+                </select>
+            </div>
+            <div class="elmt">
+                <select name="state" required="required">
+                    <option value="" disabled selected>Select state</option>
+                    <option value="INT">INT</option>
+                    <option value="FIN">FIN</option>
+                    <option value="REQ">REQ</option>
+                    <option value="ACC">ACC</option>
+                    <option value="CON">CON</option>
+                    <option value="RST">RST</option>
+                    <option value="CLO">CLO</option>
+                </select>
+            </div>
+            <!-- <div class="elmt">
+                <select name="attack_cat" required="required">
+                    <option value="" disabled selected>Select attack category</option>
+                    <option value="Normal">Normal</option>
+                    <option value="Reconnaissance">Reconnaissance</option>
+                    <option value="Backdoor">Backdoor</option>
+                    <option value="DoS">DoS</option>
+                    <option value="Exploits">Exploits</option>
+                    <option value="Analysis">Analysis</option>
+                    <option value="Fuzzers">Fuzzers</option>
+                    <option value="Worms">Worms</option>
+                    <option value="Shellcode">Shellcode</option>
+                    <option value="Generic">Generic</option>
+                </select>
+            </div> -->
+            <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
+        </form>
+    </div>
+</body>
+
+</html>
