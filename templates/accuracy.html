@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intrusion Detection in Computer Networks using CNN</title>
+    <style>
+        /* Style for the top bar */
+        .top-bar {
+            background-color: #1f2739; /* Dark blue-gray background */
+            color: #fff;
+            padding: 10px;
+            text-align:center;
+            border-radius: 9px;
+        }
+        /* Style for the links */
+        .top-bar a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        /* Body style */
+        body {
+            background-color: #708090;  /* Dark blue-black background for the body */
+            color: #fff;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            margin: 0;
+        }
+        .top-bar a:hover {
+            color: #4ecdc4; /* Light teal color on hover */
+        }
+        .top-bar a {
+            color: #c4da00;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        /* Section style */
+        section {
+            margin-top: 30px;
+        }
+        h2 {
+            color: #333;
+            /* text-align: center; */
+            background-color: #c4da00;
+        }
+        .image-container {
+            margin-bottom: 30px;
+            margin-left: 20%;
+            align-items:center; /* Reset text alignment within container */
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            /* display: block; */
+            /* margin: 0 auto; */
+            
+            /* align-items: center; 
+            align-self: center;Center align the image */
+        }
+        .image-name {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <!-- Top bar section -->
+    <div class="top-bar">
+        <h1>Intrusion Detection in Computer Networks using CNN</h1>
+        <!-- Navigation links -->
+        <a href="{{ url_for('predict') }}">Predict</a>
+        <!-- <a href="#login">Login</a> -->
+        <!-- <a href="#register">Register</a> -->
+        <a href="{{ url_for('accuracy') }}">Accuracy</a>
+        <a href="{{ url_for('data') }}">Data Insights</a>
+        <a href="{{ url_for('format') }}">Features</a>
+    </div>
+
+    <!-- Your webpage content goes here -->
+    <div class="image-container">
+        <h2>-> Accuracy over Epochs</h2>
+        <img src="{{ url_for('static', filename='image1.png') }}" alt="Image 1">
+        <!-- <p class="image-name">Accuracy Over Epochs</p> -->
+        <p>Very tiny difference in training and testing accuracies over epcohs</p>
+    </div>
+
+    <div class="image-container">
+        <h2>-> Detection Rate of Each class</h2>
+        <img src="{{ url_for('static', filename='image2.png') }}" alt="Image 2">
+        <!-- <p class="image-name">Image Name 2</p> -->
+        <p>Despite of imbalanced data, model give accuracy for every class above xx%</p>
+    </div>
+    <div class="image-container">
+        <h2>->Confusion Matrix</h2>
+        <img src="{{ url_for('static', filename='image6.png') }}" alt="Image 2">
+        <!-- <p class="image-name">Image Name 2</p> -->
+        <!-- <p>Despite of imbalanced data, model give accuracy for every class above xx%</p> -->
+    </div>
+    
+</body>
+</html>

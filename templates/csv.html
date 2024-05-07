@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Intrusion Detector</title>
+    <style>
+        .top-bar {
+            background-color: #1f2739; /* Dark blue-gray background */
+            color: #fff;
+            padding: 10px;
+            text-align:center;
+            border-radius: 9px;
+        }
+        /* Style for the links */
+        /* Body style */
+        body {
+            background-color: #708090;  /* Dark blue-black background for the body */
+            color: #fff;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            margin: 0;
+        }   
+        .top-bar a:hover {
+            color: #4ecdc4; /* Light teal color on hover */
+        }
+        .top-bar a {
+            color: #c4da00;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        /* Section style */
+        section {
+            margin-top: 30px;
+        }
+        .options-container {
+            text-align: center;
+            margin-top: 10%;
+        }
+        .option-button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .option-button:hover {
+            background-color: #0056b3;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px; /* Add margin above the table */
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: lightgray;
+            color: black;
+        }
+
+        .container {
+            /* max-width: 800px; */
+            margin: 0 auto; /* Center-align the container */
+        }
+
+        /* Serial number style */
+        .serial-number {
+            font-weight: bold;
+        }
+
+        .green-text {
+        color: green;
+        background-color: #fff;
+        text-align: center;
+        font-weight: bold;
+        }
+
+        .red-text {
+            text-align: center;
+            color: red;
+            background-color: #fff;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <h1>Intrusion Detection in Computer Networks using CNN</h1>
+        <!-- Navigation links -->
+        <a href="{{ url_for('predict') }}">Predict</a>
+        <!-- <a href="#login">Login</a> -->
+        <!-- <a href="#register">Register</a> -->
+        <a href="{{ url_for('accuracy') }}">Accuracy</a>
+        <a href="{{ url_for('data') }}">Data Insights</a>
+        <a href="{{ url_for('format') }}">Features</a>
+    </div>
+    <p></p>
+    <a href="{{ url_for('predict') }}" style="color:aqua">Back</a>
+    <div class="options-container">
+        <form action="{{ url_for('csv_predict')}}" method="post" enctype="multipart/form-data" class="csvdiv">
+            <p>Uploading .csv file should in the <a href="{{ url_for('format') }}">Format</a></p>
+            <label for="csv_file">Upload CSV File:</label>
+            <input type="file" id="csv_file" name="csv_file" accept=".csv" required>
+            <button type="submit" class="option-button">Predict from CSV</button>
+        </form>
+    </div>
+    {% if prediction_results %}
+    <div class="container">
+        <h2>Prediction Results:</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Serial Number</th>
+                    {% for attribute_name in attribute_names %}
+                    <th>{{ attribute_name }}</th>
+                    {% endfor %}
+                    <th>Predicted Label</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for serial_number, csv_tuple, predicted_label in prediction_results %}
+                <tr>
+                    <td class="serial-number">{{ serial_number }}</td>
+                    {% for value in csv_tuple %}
+                    <td>{{ value }}</td>
+                    {% endfor %}
+                    <td class="{% if predicted_label == 'Normal' %}green-text{% else %}red-text{% endif %}">{{ predicted_label }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
+</body>
+
+</html>

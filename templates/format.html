@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Intrusion Detector</title>
+    <style>
+        .top-bar {
+            background-color: #1f2739; /* Dark blue-gray background */
+            color: #fff;
+            padding: 10px;
+            text-align:center;
+            border-radius: 9px;
+        }
+        /* Style for the links */
+        /* Body style */
+        body {
+            background-color: #708090; /* Dark blue-black background for the body */
+            color: #fff;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            margin: 0;
+        }   
+        .top-bar a:hover {
+            color: #4ecdc4; /* Light teal color on hover */
+        }
+        .top-bar a {
+            color: #c4da00;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        /* Section style */
+        section {
+            margin-top: 30px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th{
+            color:black;
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: grey;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <h1>Intrusion Detection in Computer Networks using CNN</h1>
+        <!-- Navigation links -->
+        <a href="{{ url_for('predict') }}">Predict</a>
+        <!-- <a href="#login">Login</a> -->
+        <!-- <a href="#register">Register</a> -->
+        <a href="{{ url_for('accuracy') }}">Accuracy</a>
+        <a href="{{ url_for('data') }}">Data Insights</a>
+        <a href="{{ url_for('format') }}">Features</a>
+    </div>
+    <p></p>
+    <a href="{{ url_for('csv_predict') }}" style="color:aqua">Back</a>
+    <h2>Format</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Column Number</th>
+                <th>Name of colomn</th>
+                <th>Type</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>dur</td>
+                <td>Float</td>
+                <td>Record total duration</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>sbytes</td>
+                <td>Integer</td>
+                <td>Source to destination transaction bytes</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>dbytes</td>
+                <td>Integer</td>
+                <td>Destination to source transaction bytes</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>rate</td>
+                <td>Float</td>
+                <td>Transaction rate (bits per second)</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>sttl</td>
+                <td>Integer</td>
+                <td>Source to destination time to live value</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>dttl</td>
+                <td>Integer</td>
+                <td>Destination to source time to live value</td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>sload</td>
+                <td>Float</td>
+                <td>Source bits per second</td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td>dload</td>
+                <td>Float</td>
+                <td>Destination bits per second</td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td>sinpkt</td>
+                <td>Float</td>
+                <td>Source interpacket arrival time (mSec)</td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>dinpkt</td>
+                <td>Float</td>
+                <td>Destination interpacket arrival time (mSec)</td>
+            </tr>
+            <tr>
+                <td>11</td>
+                <td>sjit</td>
+                <td>Float</td>
+                <td>Source jitter (mSec)</td>
+            </tr>
+            <tr>
+                <td>12</td>
+                <td>djit</td>
+                <td>Float</td>
+                <td>Destination jitter (mSec)</td>
+            </tr>
+            <tr>
+                <td>13</td>
+                <td>swin</td>
+                <td>Integer</td>
+                <td>Source TCP window advertisement value</td>
+            </tr>
+            <tr>
+                <td>14</td>
+                <td>stcpb</td>
+                <td>Integer</td>
+                <td>Source TCP base sequence number</td>
+            </tr>
+            <tr>
+                <td>15</td>
+                <td>dtcpb</td>
+                <td>Integer</td>
+                <td>Destination TCP base sequence number</td>
+            </tr>
+            <tr>
+                <td>16</td>
+                <td>tcprtt</td>
+                <td>Float</td>
+                <td>TCP connection setup round-trip time (mSec)</td>
+            </tr>
+            <tr>
+                <td>17</td>
+                <td>synack</td>
+                <td>Float</td>
+                <td>TCP connection setup time between SYN and SYN_ACK packets</td>
+            </tr>
+            <tr>
+                <td>18</td>
+                <td>ackdat</td>
+                <td>Float</td>
+                <td>TCP connection setup time between SYN_ACK and ACK packets</td>
+            </tr>
+            <tr>
+                <td>19</td>
+                <td>smean</td>
+                <td>Integer</td>
+                <td>Mean flow packet size transmitted by the source</td>
+            </tr>
+            <tr>
+                <td>20</td>
+                <td>dmean</td>
+                <td>Integer</td>
+                <td>Mean flow packet size transmitted by the destination</td>
+            </tr>
+            <tr>
+                <td>21</td>
+                <td>trans_depth</td>
+                <td>Integer</td>
+                <td>Pipelined depth into the connection of HTTP request/response transaction</td>
+            </tr>
+            <tr>
+                <td>22</td>
+                <td>response_body_len</td>
+                <td>Integer</td>
+                <td>Actual uncompressed content size of the data transferred from the server’s HTTP service</td>
+            </tr>
+            <tr>
+                <td>23</td>
+                <td>ct_state_ttl</td>
+                <td>Integer</td>
+                <td>Number for each state according to specific range of values for source/destination time to live</td>
+            </tr>
+            <tr>
+                <td>24</td>
+                <td>ct_src_dport_ltm</td>
+                <td>Integer</td>
+                <td>Number of connections of the same source address and the destination port in 100 connections</td>
+            </tr>
+            <tr>
+                <td>25</td>
+                <td>ct_dst_sport_ltm</td>
+                <td>Integer</td>
+                <td>Number of connections of the same destination address and the source port in 100 connections</td>
+            </tr>
+            <tr>
+                <td>26</td>
+                <td>ct_dst_src_ltm</td>
+                <td>Integer</td>
+                <td>Number of connections of the same source and destination address in 100 connections according to the last time</td>
+            </tr>
+            <tr>
+                <td>27</td>
+                <td>ct_ftp_cmd</td>
+                <td>Integer</td>
+                <td>Number of flows that include a command in an FTP session</td>
+            </tr>
+            <tr>
+                <td>28</td>
+                <td>ct_flw_http_mthd</td>
+                <td>Integer</td>
+                <td>Number of flows that include HTTP methods such as Get and Post</td>
+            </tr>
+            <tr>
+                <td>29</td>
+                <td>ct_src_ltm</td>
+                <td>Integer</td>
+                <td>Number of connections of the same source address in 100 connections according to the last time</td>
+            </tr>
+            <tr>
+                <td>30</td>
+                <td>ct_srv_dst</td>
+                <td>Integer</td>
+                <td>Number of connections that contain the same service and destination address in 100 connections</td>
+            </tr>
+            <tr>
+                <td>31</td>
+                <td>is_sm_ips_ports</td>
+                <td>Binary</td>
+                <td>Binary indicator (1 or 0) if source and destination IP addresses and port numbers are equal</td>
+            </tr>
+            <tr>
+                <td>32</td>
+                <td>proto</td>
+                <td>Nominal</td>
+                <td>Transaction protocol</td>
+            </tr>
+            <tr>
+                <td>33</td>
+                <td>service</td>
+                <td>Nominal</td>
+                <td>Service type, e.g. http, ftp, smtp, etc.</td>
+            </tr>
+            <tr>
+                <td>34</td>
+                <td>state</td>
+                <td>Nominal</td>
+                <td>State and its dependent protocol, e.g. ACC, CLO, CON, FIN, INT, etc.</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>

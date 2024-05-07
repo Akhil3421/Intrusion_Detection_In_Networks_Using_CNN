@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Intrusion Detector</title>
+    <style>
+        .top-bar {
+            background-color: #1f2739; /* Dark blue-gray background */
+            color: #fff;
+            padding: 10px;
+            text-align:center;
+            border-radius: 9px;
+        }
+        /* Style for the links */
+        /* Body style */
+        body {
+            background-color: #708090; /* Dark blue-black background for the body */
+            color: #fff;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            margin: 0;
+        }   
+        .top-bar a:hover {
+            color: #4ecdc4; /* Light teal color on hover */
+        }
+        .top-bar a {
+            color: #c4da00;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        /* Section style */
+        section {
+            margin-top: 30px;
+        }
+        .options-container {
+            text-align: center;
+            margin-top: 60px;
+        }
+        .option-button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .option-button:hover {
+            background-color: #0056b3;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <h1>Intrusion Detection in Computer Networks using CNN</h1>
+        <!-- Navigation links -->
+        <a href="{{ url_for('predict') }}">Predict</a>
+        <!-- <a href="#login">Login</a> -->
+        <!-- <a href="#register">Register</a> -->
+        <a href="{{ url_for('accuracy') }}">Accuracy</a>
+        <a href="{{ url_for('data') }}">Data Insights</a>
+        <a href="{{ url_for('format') }}">Features</a>
+    </div>
+    <div class="options-container">
+        <a href="{{ url_for('csv_predict') }}" class="option-button">Predict with .csv file</a>
+        <p>Or</p>
+        <a href="{{ url_for('home') }}" class="option-button">Enter Attributes Manually</a>
+    </div>  
+</body>
+
+</html>
